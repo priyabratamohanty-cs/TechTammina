@@ -16,7 +16,7 @@ Here are the following steps needs to be taken care to run the Project.
 6. For the Node Application, run the following command, 
     nodemon (if installed) or node server.js
 7. For the Frontend (i.e) angular application, run the follwoing command
-    'ng start'
+    'ng serve'
 8. Then Go to the browser and hit following URL
     http://localhost:4200
 9. It will open the login page, where register button would be there, first register and then login and check the site
