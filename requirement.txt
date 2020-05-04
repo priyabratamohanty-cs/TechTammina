@@ -1,0 +1,32 @@
+Task 1: 
+
+1. Node REST API:
+   Create a node REST API that connects to a MongoDB database. 
+   Create endpoints for user authentication.
+   The API should receive username and password fields.
+   Ensure validation of endpoint using Joi.
+   Verify the credentials of the user in MongoDB database.
+   If the user credentials are not valid, return appropriate error message to the API.
+   If the credentials are valid, generate a JWT token and return the token with the user credentials.
+   create end points for
+    a) user registration
+    b) user login
+    c) user list (after login any one can see)
+
+2. Angular APP:
+   2.1: Create a form with following Fields & validations -
+    a. Batch Name : Mandatory, Min. length - 3, Max-length -  21
+    b. Batch Start Date & Time - Mandatory, Valid date, Must be a future date & time.
+    c. Batch End Date & Time - Mandatory, Valid date, Must be a greater than 'Batch Start Date & Time'.
+    d. Candidate Details - It consists of the following field set. User should be able to add another row of their Candidate details only if earlier rows are valid. This new row will also have a X button next to it. If user clicks on that, the respective row should get removed from display.
+        I. Candidate Name - Mandatory, Min. length - 3, Max-length -  21
+        II. Email - Optional, if value provided validate email
+        III. Mobile - Mandatory, Numbers only, provided value must be 10 character long
+        IV. Age - Mandatory, Numbers only, must be greater than 18 and less than 56
+
+    The form also should have a SUBMIT & RESET button.
+    SUBMIT - By default it will stay disabled. If all form validations are satisfied then only it should become enable. Once the form is submitted, the form should get reset by itself.
+    RESET - Should reset the form.
+
+   2.2: There should be a table to view all the batch details that has been created yet.
+

@@ -1,0 +1,67 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches"
+    *ngIf="router.url!='/login' && router.url!='/registration'">
+    <mat-toolbar color="primary" class="example-toolbar" *ngIf="(router.url!='/login') && authservice.isLoggedIn()">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="example-app-name">Tech Tamina</h1>
+        <span class="example-fill-remaining-space"></span>
+        <button mat-button>Welcome {{authservice.getUserInfo('userId')}}</button>
+
+        <span>
+            <mat-icon matSuffix mat-menu-align-target class="logout" (click)="logout()">logout</mat-icon>
+        </span>
+
+    </mat-toolbar>
+
+
+    <mat-sidenav-container [ngClass]="{'example-sidenav-container':true}"
+        [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened class="example-sidenav"
+            [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" style="min-width: 270px;">
+            <mat-nav-list>
+                <nav id="fixed">
+                    <ul class="menu">
+                        <li>
+                            <a mat-list-item routerLink="/dashboard" (click)="mobileQuery.matches?snav.toggle():false">
+                                <mat-icon class="leftnavicons">dashboard</mat-icon>DashBoard
+                            </a>
+                            <a mat-list-item routerLink="/users" (click)="mobileQuery.matches?snav.toggle():false">
+                                <mat-icon class="leftnavicons">person</mat-icon>User List
+                            </a>
+                            <a mat-list-item routerLink="/add/batch" (click)="mobileQuery.matches?snav.toggle():false">
+                                <mat-icon class="leftnavicons">contacts</mat-icon>Add Batch
+                            </a>
+                            <a mat-list-item routerLink="/view/batch" (click)="mobileQuery.matches?snav.toggle():false">
+                                <mat-icon class="leftnavicons">visibility</mat-icon>View Batch
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <div class="container pt-5">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+    <mat-toolbar class="example-footer" *ngIf="router.url!='/login' && authservice.isLoggedIn()">© 2020...All Right
+        Reserved
+    </mat-toolbar>
+
+</div>
+
+
+
+<div *ngIf="router.url=='/login'" class="background example-container">
+    <app-login></app-login>
+</div>
+
+<div *ngIf=" router.url=='/registration' " class="background example-container">
+    <app-registartion></app-registartion>
+</div>

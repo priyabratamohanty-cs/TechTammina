@@ -1,0 +1,127 @@
+<mat-label>Add Upcoming Batch Info</mat-label>
+<div class="container mt-5">
+
+    <mat-card>
+        <form [formGroup]="batchDetails" class="example-form" autocomplete="off" (ngSubmit)="saveBatch()">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Batch Name</mat-label>
+                        <input matInput formControlName="batchName" placeholder="Batch Name">
+                    </mat-form-field>
+                    <div class="col text-danger"
+                        *ngIf=" batchDetails.controls['batchName'].touched  && ( batchDetails.controls['batchName'].hasError('minlength') || batchDetails.controls['batchName'].hasError('maxlength'))">
+                        Length should be in between 3 to 21
+                    </div>
+                    <div class="col text-danger"
+                        *ngIf=" batchDetails.controls['batchName'].touched  && batchDetails.controls['batchName'].hasError('required') ">
+                        This Filed is required
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <mat-label>Batch Start Date & Time</mat-label>
+                        <input matInput [min]="minStartDate" [matDatepicker]="minmaxvalidation"
+                            placeholder="Pick a date" formControlName="startBatch"
+                            (dateChange)="setEndBatchMinDate($event)">
+                        <mat-datepicker-toggle matSuffix [for]="minmaxvalidation">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #minmaxvalidation></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <mat-label>Batch End Date & Time</mat-label>
+                        <input #minmaxInput matInput [min]="minEndDate" [matDatepicker]="minmaxvalidation1"
+                            placeholder="Pick a date" formControlName="endBatch">
+                        <mat-datepicker-toggle matSuffix [for]="minmaxvalidation1">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #minmaxvalidation1></mat-datepicker>
+                    </mat-form-field>
+                    <div *ngIf="batchDetails.controls['endBatch'].touched && batchDetails.get('startBatch').invalid"
+                        class="col text-danger">
+                        End date Should be Greater then the Start Date
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <hr>
+                    <mat-label>Candidate Details</mat-label>
+                    <button mat-stroked-button type="button" class="addnewcol" title="Add New"
+                        (click)="addNewcandidateDetails()"
+                        [disabled]="this.batchDetails.get('candidateDetails').invalid">
+                        <mat-icon>
+                            add_box
+                        </mat-icon>Add New
+                    </button>
+                    <hr style="margin-top: 20px">
+                </div>
+            </div>
+
+            <div formArrayName="candidateDetails">
+                <div [formGroupName]="i" class="paralleldesign"
+                    *ngFor="let candidateDetails of getcandidateDetails.controls; let i = index">
+                    <div class="row">
+                        <div class="col-md">
+                            <mat-form-field class="form-group ">
+                                <mat-label>Candidate Name</mat-label>
+                                <input matInput formControlName="candidateName" />
+                            </mat-form-field>
+                            <div class="col text-danger"
+                                *ngIf="getcandidateDetails.controls[i].get('candidateName').touched && getcandidateDetails.controls[i].get('candidateName').invalid">
+                                Length must be in between 3 to 21
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <mat-form-field class="form-group ">
+                                <mat-label>Email Id</mat-label>
+                                <input matInput formControlName="emailId" type="email" email="true" />
+                            </mat-form-field>
+                            <div class="col text-danger"
+                                *ngIf="getcandidateDetails.controls[i].get('emailId').touched && getcandidateDetails.controls[i].get('emailId').invalid">
+                                Please pass a valid email
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <mat-form-field class="form-group ">
+                                <mat-label>mobile No</mat-label>
+                                <input matInput formControlName="mobileNo" [pattern]="mobNumberPattern" />
+                            </mat-form-field>
+                            <div class="col text-danger"
+                                *ngIf="getcandidateDetails.controls[i].get('mobileNo').touched && getcandidateDetails.controls[i].get('mobileNo').invalid">
+                                MobileNo should be exact 10 digit only
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <mat-form-field class="form-group ">
+                                <mat-label>Age</mat-label>
+                                <input matInput formControlName="age" [pattern]="agePattern" />
+                            </mat-form-field>
+                            <div class="col text-danger"
+                                *ngIf="getcandidateDetails.controls[i].get('age').touched && getcandidateDetails.controls[i].get('age').invalid">
+                                Age Should be in between 18-56
+                            </div>
+                        </div>
+                        <div class="col-md-1 mt-3 delete" >
+                            <mat-icon (click)="deleteCandidateDetails(i)">delete</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="batchDetails.pristine || batchDetails.invalid" mat-raised-button
+                color="primary">
+                Submit
+            </button>
+            <button type="button" class="ml-5" mat-raised-button (click)="resetForm()">
+                Reset
+            </button>
+        </form>
+
+    </mat-card>
+</div>

@@ -1,0 +1,72 @@
+<div style="margin-top: 20px">
+    <mat-form-field style="float: right;width:auto" class="border-success">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+
+    <div class="mat-elevation-z8" id="test">
+        <h5 style="padding: 20px;color:blue">Batch Details</h5>
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column | uppercase}} </th>
+
+
+                <p *ngIf="column == 'startBatch' || column == 'endBatch'" >
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        {{ element[column] | date}}
+                    </td>
+                </p>
+
+                <p *ngIf="column != 'action'">
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        {{ element[column] }}
+                    </td>
+                </p>
+                <p *ngIf="column == 'action'">
+
+                    <td mat-cell *matCellDef="let element; index as i;">
+                        <p class="actions">
+                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="expandedElement = expandedElement === element ? null : element">
+                                    <mat-icon>info</mat-icon>
+                                    <span>Details</span>
+                                </button>
+                            </mat-menu>
+                        </p>
+                    </td>
+                </p>
+            </ng-container>
+
+            <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                    <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+                        <mat-card style="width:100%;margin:5px">
+                            <table>
+                                <thead>
+                                    <th *ngFor="let itemshead of objectKeys(element.candidateDetails[0])" style="padding: 10px">{{itemshead | uppercase }}</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let items of element.candidateDetails" style="border: 1px solid #8080802e">
+                                        <td *ngFor="let itemsval of objectKeys(element.candidateDetails[0])" style="padding: 10px">{{items[itemsval]}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </mat-card>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row" [class.example-expanded-row]="expandedElement === element">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[ 10, 20, 50,100]"></mat-paginator>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="row" style="margin: 0px">
+    <div class="container1 col-lg-8">
+        <div class="row">
+            <div class="col-lg">
+                <div style="margin: 20%">
+                    <div class="card">
+                        <div class="card-header" style="background-color: lightseagreen">
+                            Login
+                        </div>
+                        <div class="card-body container">
+                            <form [formGroup]="loginDetails" (ngSubmit)="onSubmit()">
+                                <div class="row">
+                                    <div class="col">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>User Id</mat-label>
+                                            <input matInput placeholder="User Id" formControlName="userId">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <mat-form-field appearance="outline" style="display: block">
+                                            <mat-label>Password</mat-label>
+                                            <input matInput type="password" placeholder="Password"
+                                                formControlName="password">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="submit" mat-flat-button color="primary"> Login</button>
+                                        <button type="button" mat-raised-button color="primary" style="float: right"
+                                            routerLink="/registration">Register</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- <div class="col">
+                                <button mat-raised-button (click)="back()" style="float: right">Back</button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-4">
+        <div class="card center-organization" style="background-color:inherit;border: 0">
+            <p style="text-align: center;color: white;font-weight: bold">WelCome To TechTamina</p>
+        </div>
+    </div>
+</div>

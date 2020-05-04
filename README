@@ -1,0 +1,24 @@
+This is the Techtammina Interview test Project. 
+For Project Requirement, please check requirement.txt file.
+
+Here are the following steps needs to be taken care to run the Project.
+
+1. This project has been implemented using MEAN Stack, Make sure your system must have followings installed
+    a. MONGODB
+    b. NODEJS
+    c. Angular 8
+
+2. Download/clone the project and keep it in a good path to access easily
+3. Go to the path, use VSCode(Recomendate) or any other good JavaScript Editor.
+4. both project opn in corresponding path, then open terminal for both
+5. Run following Command
+    'npm install' (in both, don't give single quote)
+6. For the Node Application, run the following command, 
+    nodemon (if installed) or node server.js
+7. For the Frontend (i.e) angular application, run the follwoing command
+    'ng start'
+8. Then Go to the browser and hit following URL
+    http://localhost:4200
+9. It will open the login page, where register button would be there, first register and then login and check the site
+
+Thank You.

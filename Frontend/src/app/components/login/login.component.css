@@ -1,0 +1,25 @@
+.center-div {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    background-color: white !important;
+    left: 25%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.container1 {
+    height: 100vh;
+    background-color: white;
+}
+
+.center-organization {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 50%);
+}
